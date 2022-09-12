@@ -1,0 +1,78 @@
+<ng-container *rxLet="vm$; let vm">
+
+  <table
+    [class.overlay]="vm.status === 'loading'"
+    class="table table-striped table-hover"
+  >        <fieldset>
+    <form [formGroup]="form">
+        <th scope="col" class="border-bottom">Name
+          <input type="text" id="search" name="search" formControlName="search">
+        </th>
+        <th scope="col" class="border-bottom">
+          size
+          <input type="number" id="size" name="search" formControlName="weight">
+        </th>
+        <th scope="col" class="border-bottom">
+          Height
+          <input type="number" id="height" name="search" formControlName="height">
+        </th> 
+
+            <label class="radio-inline">
+              <input
+                type="checkbox"
+                name="eq"
+                id="eq"
+                value="eq"
+                formControlName="eq"
+                checked
+              />equals </label
+            >
+            <label class="radio-inline">
+              <input
+                type="checkbox"
+                name="gt"
+                id="gt"
+                value="gt"
+                formControlName="gt"
+              />greater than </label
+            >
+            <label class="radio-inline">
+              <input
+                type="checkbox"
+                name="lt"
+                id="lt"
+                value="lt"
+                formControlName="lt"
+              />less than </label
+            >
+                      </form> 
+                      
+      </fieldset>
+            <button type="button" class="btn btn-primary btn-reset" (click)="reset_filter()">
+              Reset
+            </button>
+    <thead>  
+   
+      <th>Name</th>
+      <th>Size</th>
+      <th>Height</th>
+            
+     </thead>
+
+    <tbody>
+      <tr *ngFor="let result of vm.filteredResult">
+        <td scope="col">{{ result.name }}</td>
+        <td scope="col">{{ result.weight }}</td>
+        <td scope="col">{{ result.height }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <app-paginator
+    [currentPage]="vm.currentPage"
+    [rowsPerPageOptions]="[10, 20, 40, 80]"
+    [rows]="vm.limit"
+    [totalRecords]="vm.total"
+    [first]="vm.offset + vm.limit"
+    (onPageChange)="onPageChanged($event)"
+  ></app-paginator>
+</ng-container>

@@ -1,0 +1,22 @@
+<div>
+    <button type="button" [disabled]="currentPage === 1" (click)="changePageToFirst($event)">
+      <span><<</span>
+    </button>
+    <button type="button" [disabled]="currentPage === 1" (click)="changePageToPrev($event)">
+      <span><</span>
+    </button>
+    <span class="paginator-pages">
+        {{ currentPage }} of {{lastPage}}
+    </span>
+    <button type="button" [disabled]="currentPage === lastPage || !lastPage" (click)="changePageToNext($event)">
+      <span>></span>
+    </button>
+    <button type="button" [disabled]="currentPage === lastPage || !lastPage" (click)="changePageToLast($event)">
+      <span>>></span>
+    </button>
+    <select [value]="rows" (change)="onRppChange($event)" class="paginator-rows-per-page">
+      <option *ngFor="let item of rowsPerPageOptions" [selected]="rows === item" [value]="item.toString()">
+        {{ item }}
+      </option>
+    </select>
+  </div>
